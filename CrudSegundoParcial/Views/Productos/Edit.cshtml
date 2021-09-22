@@ -1,0 +1,75 @@
+﻿@model CrudSegundoParcial.Models.Productos
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-custom">
+    <div class="card-header">
+        <h3 class="card-title">
+            EDITAR ACTIVIDAD
+        </h3>
+        <div class="card-toolbar">
+            <div class="example-tools justify-content-center">
+                <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+                <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+            </div>
+        </div>
+    </div>
+    <!--begin::Form-->
+
+
+
+    <form class="form" method="post" asp-action="Edit" enctype="multipart/form-data">
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Estado_Id)
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="card-body">
+            <div class="form-group">
+                <label asp-for="Producto">Nombre del Producto<span class="text-danger">*</span></label>
+                <input asp-for="Producto" class="form-control" />
+                <span asp-validation-for="Producto" class="text-danger form-text"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion">Descripcion del Producto<span class="text-danger">*</span></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger form-text"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio_venta">Precio venta del Producto<span class="text-danger">*</span></label>
+                <input asp-for="Precio_venta" class="form-control" />
+                <span asp-validation-for="Precio_venta" class="text-danger form-text"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio_costo">Precio costo del Producto<span class="text-danger">*</span></label>
+                <input asp-for="Precio_costo" class="form-control" />
+                <span asp-validation-for="Precio_costo" class="text-danger form-text"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Existencia">Existencia del Producto<span class="text-danger">*</span></label>
+                <input asp-for="Existencia" class="form-control"  />
+                <span asp-validation-for="Existencia" class="text-danger form-text"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelect1">Marca <span class="text-danger">*</span></label>
+                <select asp-for="Marca_Id" asp-items="@(new SelectList(ViewBag.listMarcas,"Id","Marca"))" class="form-control">
+                    <option>Seleccione</option>
+                </select>
+                <span asp-validation-for="Marca_Id" class="text-danger form-text"></span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" class="btn btn-primary mr-2" value="Guardar" />
+            <button type="reset" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </form>
+    <!--end::Form-->
+</div>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

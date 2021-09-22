@@ -1,0 +1,85 @@
+﻿@model IEnumerable<CrudSegundoParcial.Models.Productos>
+@{
+    ViewData["Title"] = "Lista de Productos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["mensaje"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"><h1>Productos</h1></div>
+    <div class="col-md-4"></div>
+</div>
+<div class="container">
+    <!--begin::Card-->
+    <div class="card">
+        <div class="card-header flex-wrap py-5">
+            <div class="card-title">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>
+                            Lista Productos
+                        </h3>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-primary font-weight-bolder" asp-action="Create" asp-controller="Productos">Agregar</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!--begin: Datatable-->
+            <table class="table table-separate table-head-custom table-checkable" id="">
+
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Producto)</td>
+                        <td>@Html.DisplayNameFor(m => m.Descripcion)</td>
+                        <td>@Html.DisplayNameFor(m => m.Precio_costo)</td>
+                        <td>@Html.DisplayNameFor(m => m.Precio_venta)</td>
+                        <td>@Html.DisplayNameFor(m => m.Existencia)</td>
+                        <td>@Html.DisplayNameFor(m => m.Marca_Id)</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var r in Model)
+                        {
+                            <tr>
+                                <td>@r.Producto</td>
+                                <td>@r.Descripcion</td>
+                                <td>@r.Precio_costo</td>
+                                <td>@r.Precio_venta</td>
+                                <td>@r.Existencia</td>
+                                <td>@r.Marcas.Marca</td>
+                                <td>
+                                    <a asp-controller="Productos" asp-action="Edit" asp-route-id="@r.Id" class="btn btn-warning">Editar</a>
+                                    <a asp-controller="Productos" asp-action="Eliminar" asp-route-id="@r.Id" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <p>NO hay nada en la BD</p>
+                    }
+                </tbody>
+            </table>
+
+            <!--end: Datatable-->
+        </div>
+    </div>
+    <!--end::Card-->
+</div>
+<!--end::Container-->
